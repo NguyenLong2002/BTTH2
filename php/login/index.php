@@ -12,7 +12,7 @@ try
     $_SESSION['password'] = $userPass;
 
    
-    $conn = new PDO("mysql:host=localhost;dbname=btth02", 'root', '');
+    $conn = new PDO("mysql:host=localhost;dbname=bt2", 'root', '');
     $sql = "select * from users where username = :username and password = :password";
     
     $stmt = $conn -> prepare($sql);
@@ -22,7 +22,7 @@ try
     $member = $stmt ->fetchAll();
    
     if($stmt -> rowCount()==1 and end($member[0])==1){
-        header('Location: ../studentAttendance/studentAttendance.php');
+        header('Location: ../AttendanceStudent/AttendanceStudent.php');
     }
     else if($stmt -> rowCount()==1 and end($member[0])==0)
     {

@@ -1,19 +1,8 @@
 <?php
-
-    // //$username = $_POST['username'] ?? '';
-    // //$password = $_POST['password'] ?? '';
-    // if(isset($_POST['username'])&&isset($_POST['password'])){
-    //     echo $username;
-    //     
-    // 
-    //     echo $password;}
     session_start();
    
     $userName = $_SESSION['username']; 
     $userPass = $_SESSION['password'];
-    
-    //echo $userName."+".$userPass;
-
     
 
     // Connect to database
@@ -33,12 +22,6 @@
    $sql_classes =  $conn->prepare('SELECT classname from classes');
    $sql_classes->execute();
    $classes = $sql_classes->fetchAll();
-    //query
-    //$sql = "SELECT * FROM users WHERE username == $username AND password == $password"
-
-    //query classes
-    //$sql
-    //Notification điểm danh thành công
     $Noti ="";
 // Add status "attend" to database
 if($_SERVER['REQUEST_METHOD']=='POST' ){
@@ -64,7 +47,7 @@ if($_SERVER['REQUEST_METHOD']=='POST' ){
     $insert_attendance = $conn -> prepare($insert_sql);
     $insert_attendance -> bindValue(1,$IDatt[0]+1,PDO::PARAM_STR);
     $insert_attendance -> bindValue(2,$currentDateTime,PDO::PARAM_STR);
-    $insert_attendance-> bindValue(3,$IDclass[0],PDO::PARAM_STR);
+    $insert_attendance-> bindValue(3,$IDclass,PDO::PARAM_STR);
     $insert_attendance -> bindValue(4,$id_sv,PDO::PARAM_STR);
     $insert_attendance -> bindValue(5,'attend',PDO::PARAM_STR);
     if($insert_attendance ->execute() === TRUE){
@@ -91,7 +74,7 @@ if($_SERVER['REQUEST_METHOD']=='POST' ){
     <!--Attendance-->
     <div class="container">
   
-    <form action="./studentAttendance.php" method="POST">
+    <form action="./AttendanceStudent.php" method="POST">
     <div class="mt-3 form-group">
         <label>Mã Sinh Viên</label>
             <input class="form-control" name="id_sv" value="<?= $names[0][0]; ?>" type="hidden" >
@@ -128,7 +111,7 @@ if($_SERVER['REQUEST_METHOD']=='POST' ){
     <!--Navigate to the showInformationAttendance.php-->
     <div class="container mt-5">
         <div class="text-center">
-            <a href="showInformationAttendance.php">Xem thông tin điểm danh</a>
+            <a href="ShowInfoAttendance.php">Xem thông tin điểm danh</a>
         </div>
     </div>
 
